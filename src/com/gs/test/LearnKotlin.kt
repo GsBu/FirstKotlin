@@ -1,5 +1,8 @@
 package com.gs.first.com.gs.test
 
+import java.io.BufferedReader
+import java.io.StringReader
+import java.lang.NumberFormatException
 import java.util.*
 import javax.print.attribute.IntegerSyntax
 
@@ -37,6 +40,19 @@ fun main(args: Array<String>){
     println("\n${isLetter('q')} ${isNotDigit('x')} ${recognize('0')}")
     //这里字符串是按照字母表顺序进行比较，因为String就是这样实现Comparable的。t在s之后，所以结果为false
     println("tKotlin" in "Java".."Scala")
+
+    val reader = BufferedReader(StringReader("是撒"))
+    println("读取的数据=${readNumber(reader)}")
+}
+
+fun readNumber(reader: BufferedReader) {
+    val number = try {
+        val line = reader.readLine()
+        Integer.parseInt(line)
+    }catch (e: NumberFormatException){
+        null
+    }
+    println("读取的方法内部打印=${number}")
 }
 
 fun isLetter(c: Char) = c in 'a'..'z' || c in 'A'..'Z'
