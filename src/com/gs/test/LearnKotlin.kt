@@ -11,6 +11,9 @@ fun main(args: Array<String>){
     val rectangle = createRandomRectangle()
     println("随机创建一个矩形，高=${rectangle.height}，宽=${rectangle.width}，是否是正方形=${rectangle.isSquare}")
     println("颜色值=${getMnemonic2(Color.BLUE, Color.RED)}")
+
+    println("求和=${eval(Sum(Sum(Num(1), Num(2)), Num(4)))}")
+
 }
 
 fun min(a: Int, b: Int):Int {
