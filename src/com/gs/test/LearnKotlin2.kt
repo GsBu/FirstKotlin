@@ -10,13 +10,14 @@ fun main(args: Array<String>){
     println("\n ${set.javaClass}, ${list.javaClass}, ${map.javaClass}")
     println("${list}最后一个数据=${list.last()}，${set}最大值=${set.max()}")
 
+    println(joinToString(list, "(", postfix = ")", prefix = "6"))
 }
 
-fun <T>joinToString(collection: Collection<T>, separator: String, prefix: String, postfix: String): String{
+fun <T>joinToString(collection: Collection<T>, separatorf: String = ", ", prefix: String = "", postfix: String = ""): String{
     val result = StringBuilder(prefix)
 
     for ((index, element) in collection.withIndex()){
-        if (index > 0) result.append(separator)
+        if (index > 0) result.append(separatorf)
         result.append(element)
     }
     result.append(postfix)
