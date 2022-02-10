@@ -14,7 +14,18 @@ fun main(args: Array<String>){
 
     println("求和=${eval(Sum(Sum(Num(1), Num(2)), Num(4)))}")
 
+    for (i in 11 downTo 10){
+        print("${fizzBuzz(i)} ")
+    }
 }
+
+fun fizzBuzz(num : Int) =
+    when{
+        num % 15 == 0 -> "FizzBuzz"
+        num % 3 == 0 -> "Fizz"
+        num % 5 == 0 -> "Buzz"
+        else -> "$num"
+    }
 
 fun min(a: Int, b: Int):Int {
     return if (a > b) b else a
