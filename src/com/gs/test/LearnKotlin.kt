@@ -1,5 +1,8 @@
 package com.gs.first.com.gs.test
 
+import java.util.*
+import javax.print.attribute.IntegerSyntax
+
 fun main(args: Array<String>){
     val a: Int
     val b: Int = 8
@@ -14,9 +17,35 @@ fun main(args: Array<String>){
 
     println("求和=${eval(Sum(Sum(Num(1), Num(2)), Num(4)))}")
 
-    for (i in 11 downTo 10){
+    for (i in 100 downTo 10){
         print("${fizzBuzz(i)} ")
     }
+    println("\n遍历map")
+    val binaryReps = TreeMap<Char, String>()
+    for (c in 'A' until 'F'){
+        val binary = Integer.toBinaryString(c.toInt())
+        binaryReps[c] = binary
+    }
+    for ((a, b) in binaryReps){
+        print("$a = $b，")
+    }
+    println("\n遍历Array")
+    val list = arrayListOf("10", "11", "101")
+    for ((index, value) in list.withIndex()){
+        print("$index = $value，")
+    }
+    println("\n${isLetter('q')} ${isNotDigit('x')} ${recognize('0')}")
+    //这里字符串是按照字母表顺序进行比较，因为String就是这样实现Comparable的。t在s之后，所以结果为false
+    println("tKotlin" in "Java".."Scala")
+}
+
+fun isLetter(c: Char) = c in 'a'..'z' || c in 'A'..'Z'
+fun isNotDigit(n : Char) = n !in '0'..'9'
+
+fun recognize(c: Char) = when(c){
+    in '0'..'9' -> "是数字"
+    in 'a'..'z', in 'A'..'Z' -> "是字母"
+    else -> "未知"
 }
 
 fun fizzBuzz(num : Int) =
