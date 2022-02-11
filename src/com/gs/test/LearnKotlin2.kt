@@ -1,5 +1,9 @@
 package com.gs.first.com.gs.test
 
+import com.gs.test.SuanFa
+
+const val STRING = "Hello, Kotlin!"
+
 fun main(args: Array<String>){
     val set = setOf(1, 2, 3, 4, 5, 6, 88)
     val list = listOf("a", "b", "c")
@@ -11,6 +15,8 @@ fun main(args: Array<String>){
     println("${list}最后一个数据=${list.last()}，${set}最大值=${set.max()}")
 
     println(joinToString(list, "(", postfix = ")", prefix = "6"))
+    println("顶层属性$STRING")
+    SuanFa.isValid("()[]")
 }
 
 fun <T>joinToString(collection: Collection<T>, separatorf: String = ", ", prefix: String = "", postfix: String = ""): String{
