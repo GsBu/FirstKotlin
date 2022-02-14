@@ -3,6 +3,10 @@ package com.gs.test;
 import com.gs.first.com.gs.test.LearnKotlin2Kt;
 
 public class SuanFa {
+    public static void main(String[] args){
+        System.out.println("Java 代码");
+    }
+
     public static char callKotlin(){
         return LearnKotlin2Kt.lastChar("sdfdfdasj");
     }
@@ -35,5 +39,18 @@ public class SuanFa {
             return false;
         }
         return true;
+    }
+
+    //540. 有序数组中的单一元素
+    public int singleNonDuplicate(int[] nums) {
+        for (int i = 1; i < nums.length; i++){
+            if(nums[0] == nums[i]){
+                i++;
+                nums[0]=nums[i];
+            }else {
+                return nums[0];
+            }
+        }
+        return nums[0];
     }
 }

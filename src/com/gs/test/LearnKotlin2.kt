@@ -24,6 +24,21 @@ fun main(args: Array<String>){
     println("扩展函数，是否创建一个正方形${Rectangle(width = 5, height = 8).createSquare()}")
     println("扩展函数，java中调用扩展函数=${SuanFa.callKotlin()}")
 
+    val view: View = Button()
+    view.click()
+    view.showOff()
+}
+
+fun View.showOff() = println("View showOff")
+
+fun Button.showOff() = println("Button showOff")
+
+open class View{
+    open fun click() = println("View clicked")
+}
+
+class Button: View(){
+    override fun click() = println("Button clicked")
 }
 
 fun Rectangle.createSquare(): Boolean {
