@@ -1,6 +1,12 @@
 package com.gs.test;
 
+import com.gs.first.com.gs.test.LearnKotlin2Kt;
+
 public class SuanFa {
+    public static char callKotlin(){
+        return LearnKotlin2Kt.lastChar("sdfdfdasj");
+    }
+
     public static boolean isValid(String s) {
         char[] charArray = s.toCharArray();
         if(charArray.length % 2 == 0){

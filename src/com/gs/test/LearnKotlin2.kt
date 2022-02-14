@@ -16,11 +16,14 @@ fun main(args: Array<String>){
     println("\n ${set.javaClass}, ${list.javaClass}, ${map.javaClass}")
     println("${list}最后一个数据=${list.last()}，${set}最大值=${set.max()}")
 
-    println(joinToString(list, postfix = ")", prefix = "6"))
+    println(set.joinToString(postfix = "]", prefix = "["))
+    println("扩展函数，join=${list.join()}")
     println("顶层属性$STRING")
     //对于扩展函数，Kotlin的语法，要求你用简短的名称，所以在导入声明时，关键字as就是解决命名冲突的唯一方式。
     println("扩展函数，字符串最后一个字符=${"aaadf1".lastChar2()}")
     println("扩展函数，是否创建一个正方形${Rectangle(width = 5, height = 8).createSquare()}")
+    println("扩展函数，java中调用扩展函数=${SuanFa.callKotlin()}")
+
 }
 
 fun Rectangle.createSquare(): Boolean {
@@ -30,13 +33,15 @@ fun Rectangle.createSquare(): Boolean {
 //对于扩展函数，Kotlin的语法，要求你用简短的名称，所以在导入声明时，关键字as就是解决命名冲突的唯一方式。
 fun String.lastChar(): Char = get(length - 1)
 
-fun <T>joinToString(collection: Collection<T>, separatorf: String = ", ", prefix: String = "", postfix: String = ""): String{
+fun <T> Collection<T>.joinToString(separatorf: String = ", ", prefix: String = "", postfix: String = ""): String{
     val result = StringBuilder(prefix)
 
-    for ((index, element) in collection.withIndex()){
+    for ((index, element) in this.withIndex()){
         if (index > 0) result.append(separatorf)
         result.append(element)
     }
     result.append(postfix)
     return result.toString()
 }
+
+fun Collection<String>.join(a: String = "*", b: String = "{", c: String = "}") = joinToString(a, b, c)
