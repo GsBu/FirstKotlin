@@ -40,6 +40,32 @@ fun main(args: Array<String>){
                        .|//
                        .|/ \ $ 99""".trimMargin(".")
     println(kotlinLogo)
+
+    saveUser(User(1, "", ""))
+}
+
+class User(val id: Int, val name: String, val address: String)
+
+fun User.validateBeforeSave(){
+    fun validate(value: String, fieldName: String){
+        if (value.isEmpty()){
+            throw IllegalArgumentException("不能保存该用户${id}：${fieldName}为空")
+        }
+    }
+    validate(name, "姓名1")
+    validate(address, "地址1")
+}
+
+fun saveUser(user: User){
+
+    user.validateBeforeSave()
+
+    if(user.name.isEmpty()){
+        throw IllegalArgumentException("不能保存该用户${user.id}：姓名2为空")
+    }
+    if(user.address.isEmpty()){
+        throw IllegalArgumentException("不能保存该用户${user.id}：地址2为空")
+    }
 }
 
 fun parsePath(path: String){
