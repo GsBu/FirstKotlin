@@ -5,6 +5,9 @@ import com.gs.first.com.gs.test.LearnKotlin2Kt;
 public class SuanFa {
     public static void main(String[] args){
         System.out.println("Java 代码");
+        for (String str : "12.345-6.A".split("\\.")){
+            System.out.print(str+" ");
+        }
     }
 
     public static char callKotlin(){

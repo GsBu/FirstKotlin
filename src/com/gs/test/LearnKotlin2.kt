@@ -32,6 +32,32 @@ fun main(args: Array<String>){
     val list2 = listOf("args", array)
     println(list2)
     varargFun("a", "b", "v", *args, "m")
+
+    println("12.345-6.A".split("-", "."))
+    parsePath2("C:/Users/longlong.bu/Desktop/数据结构/课件/1.1绪论.ppt")
+
+    val kotlinLogo = """| //
+                       .|//
+                       .|/ \ $ 99""".trimMargin(".")
+    println(kotlinLogo)
+}
+
+fun parsePath(path: String){
+    val directory = path.substringBeforeLast("/")
+    val fullName = path.substringAfterLast("/")
+
+    val fileName = fullName.substringBeforeLast(".")
+    val extension = fullName.substringAfterLast(".")
+    println("解析路径：目录：${directory}，文件名：$fileName，扩展名：${extension}")
+}
+
+fun parsePath2(path: String){
+    val regex = """(.+)/(.+)\.(.+)""".toRegex()
+    val matchResult = regex.matchEntire(path)
+    if(matchResult != null){
+        val (directory, fileName, extension) = matchResult.destructured
+        println("解析路径：目录：${directory}，文件名：$fileName，扩展名：${extension}")
+    }
 }
 
 infix fun Any.to(other: Any) = Pair(this, other)
