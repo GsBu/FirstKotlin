@@ -3,7 +3,9 @@ package com.gs.test;
 import com.gs.first.com.gs.test.LearnKotlin2Kt;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SuanFa {
     public static void main(String[] args){
@@ -11,6 +13,7 @@ public class SuanFa {
         for (String str : "12.345-6.A".split("\\.")){
             System.out.print(str+" ");
         }
+        lengthOfLongestSubstring("abcabcbb");
     }
 
     public static char callKotlin(){
@@ -96,5 +99,30 @@ public class SuanFa {
             }
         }
         return a;
+    }
+
+    //3. 无重复字符的最长子串
+    public static int lengthOfLongestSubstring(String s) {
+        if(s.isEmpty()){
+            return 0;
+        }
+        int result = 1;
+        Set set = new HashSet<Character>();
+
+        for(int i = 0; i < s.length() - 1; i++){
+            set.clear();
+            set.add(s.charAt(i));
+            for(int n = i + 1; n < s.length(); n++){
+                if(!set.contains(s.charAt(n))){
+                    set.add(s.charAt(n));
+                }else {
+                    break;
+                }
+            }
+            if(set.size() > result){
+                result = set.size();
+            }
+        }
+        return result;
     }
 }

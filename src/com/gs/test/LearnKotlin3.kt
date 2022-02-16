@@ -7,6 +7,28 @@ fun main(args: Array<String>){
     val myButton = RichButton()
     myButton.disable()
     TalkButton().click()
+    MyStateButton().getCurrentState()
+}
+
+interface State: java.io.Serializable
+
+interface MyView{
+    val a: String
+    fun getCurrentState(): State
+    fun restoreState(state: State) {}
+}
+
+class MyStateButton : MyView{
+    override val a: String = "a"
+    override fun getCurrentState(): State {
+        return ButtonState()
+    }
+
+    inner class ButtonState : State{
+        fun getOuterA(){
+            this@MyStateButton.a
+        }
+    }
 }
 
 internal open class TalkButton : Clickable{
