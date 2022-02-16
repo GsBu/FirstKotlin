@@ -4,6 +4,34 @@ fun main(args: Array<String>){
     println("类、对象、接口")
     MyButton().click()
     MyButton().showOff()
+    val myButton = RichButton()
+    myButton.disable()
+    TalkButton().click()
+}
+
+internal open class TalkButton : Clickable{
+    override fun click() {
+        println("自定义按钮：TalkButton")
+    }
+
+    private fun yell() = println("Hey!")
+
+    protected fun whisper() = println("whisper!")
+}
+
+internal fun TalkButton.giveSpeech(){
+    click()
+}
+
+abstract class Animated{
+    abstract fun animated()
+    open fun stopAnimating(){
+
+    }
+
+    fun animateTwice(){
+
+    }
 }
 
 interface Clickable{
@@ -20,8 +48,12 @@ interface Clickable2{
     }
 }
 
-class MyButton : Clickable, Clickable2{
-    override fun click() {
+open class MyButton : Clickable, Clickable2{
+    fun disable(){
+        println("父类disable")
+    }
+
+    final override fun click() {
         println("自定义按钮")
     }
 
@@ -29,5 +61,12 @@ class MyButton : Clickable, Clickable2{
         super<Clickable2>.showOff()
         super<Clickable>.showOff()
         super<Clickable2>.showOff()
+    }
+}
+
+class RichButton : MyButton(){
+
+    fun disable2() {
+        println("子类disable")
     }
 }
