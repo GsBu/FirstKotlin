@@ -8,6 +8,49 @@ fun main(args: Array<String>){
     myButton.disable()
     TalkButton().click()
     MyStateButton().getCurrentState()
+    MyUser("ss")
+}
+
+class Child2(name: String): Parent(name){
+
+}
+
+class Child: Parent{
+    constructor(name: String): this(name, ""){
+    }
+
+    constructor(name: String, aa: String): super(name){
+
+    }
+}
+
+open class Parent{
+    constructor(name: String){
+
+    }
+}
+
+class MyUser4(_name: String): MyUser(_name){
+
+}
+
+class MyUser3(val name: String = "aa")
+
+class MyUser2(_name: String){
+    val name = _name
+}
+
+open class MyUser internal constructor(_name: String){
+    val name: String = _name
+    init {
+        println("初始化语句块1，参数${_name}")
+    }
+    init {
+        println("初始化语句块2，参数${_name}")
+    }
+    fun a(){
+
+    }
 }
 
 interface State: java.io.Serializable
