@@ -125,4 +125,53 @@ public class SuanFa {
         }
         return result;
     }
+
+    //11. 盛最多水的容器
+    public int maxArea(int[] height) {
+        if(height.length < 2){
+            return 0;
+        }
+
+        int result = 0;
+        int l = 0, r = height.length - 1;
+        while (l < r){
+            if(height[l] < height[r]){
+                if(result < height[l] * (r - l)){
+                    result = height[l] * (r - l);
+                }
+                ++l;
+            }else {
+                if(result < height[r] * (r - l)){
+                    result = height[r] * (r - l);
+                }
+                --r;
+            }
+        }
+        return result;
+    }
+
+    //42. 接雨水
+    public int trap(int[] height) {
+        int result = 0;
+        int l = 0, r = height.length - 1;
+        int lMax = height[l], rMax = height[r];
+        while (l < r){
+            if(height[l] < height[r]){
+                if(height[l + 1] < lMax){
+                    result += lMax - height[l + 1];
+                }else {
+                    lMax = height[l + 1];
+                }
+                ++l;
+            }else {
+                if(height[r - 1] < rMax){
+                    result += rMax - height[r - 1];
+                }else {
+                    rMax = height[r - 1];
+                }
+                --r;
+            }
+        }
+        return result;
+    }
 }

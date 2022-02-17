@@ -16,6 +16,32 @@ fun main(args: Array<String>){
     val a = A("张三")
     a.address = "苏州"
     a.address
+
+    println("类实例：${Client("a", 1123)}，${Client2("a", 1123)}")
+    val set: Set<Client2> = hashSetOf(Client2("1", 111))
+    println("set中是否已经有：${set.contains(Client2("1", 111))}")
+}
+
+data class Client2(val name: String, val postalCode: Int)
+
+class Client(val name: String, val postalCode: Int){
+
+    override fun hashCode(): Int {
+        return name.hashCode() * 31 + postalCode
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if(other == null || other !is Client){
+            return false
+        }
+        return name == other.name && postalCode == other.postalCode
+    }
+
+    override fun toString(): String {
+        return "Client[name=$name, postalCode=$postalCode]"
+    }
+
+    fun copy(name: String = this.name, postalCode: Int = this.postalCode) = Client(name, postalCode)
 }
 
 class A(val name: String){
