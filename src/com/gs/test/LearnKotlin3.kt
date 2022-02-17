@@ -9,6 +9,35 @@ fun main(args: Array<String>){
     TalkButton().click()
     MyStateButton().getCurrentState()
     MyUser("ss")
+
+    println("${PrivateUser("test@qq.com").nickname}")
+    println("${SubUser("test@qq.com").nickname}")
+}
+
+interface MyUser33{
+    val email: String
+    val nickname: String
+        get() = email.substringBefore('@')
+}
+
+class PrivateUser(override val email: String): MyUser33
+
+class SubUser(override val email: String): MyUser33{
+    override val nickname: String
+        get() = email.substringBefore(".")
+}
+
+class FacebookUser(val accountId: Int): MyUser33{
+    override val email: String = getFacebookEmail(accountId)
+    override val nickname: String = getFacebookName(accountId)
+}
+
+fun FacebookUser.getFacebookEmail(accountId: Int) : String{
+    return ""
+}
+
+fun FacebookUser.getFacebookName(accountId: Int) : String{
+    return ""
 }
 
 class Child2(name: String): Parent(name){
