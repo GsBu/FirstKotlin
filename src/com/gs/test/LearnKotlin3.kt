@@ -12,6 +12,23 @@ fun main(args: Array<String>){
 
     println("${PrivateUser("test@qq.com").nickname}")
     println("${SubUser("test@qq.com").nickname}")
+
+    val a = A("张三")
+    a.address = "苏州"
+    a.address
+}
+
+class A(val name: String){
+    var address: String = "未设置"
+        public set(value: String){
+            println("${name}重新设置住址：${field}->$value")
+            field = value
+        }
+        public get() {
+            println("${name}获取住址：${field}")
+            return field
+        }
+
 }
 
 interface MyUser33{
