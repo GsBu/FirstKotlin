@@ -1,5 +1,8 @@
 package com.gs.first.com.gs.test
 
+import com.gs.first.com.gs.test.shejimoshi.Person1
+import java.io.File
+
 fun main(args: Array<String>){
     println("类、对象、接口")
     MyButton().click()
@@ -20,11 +23,69 @@ fun main(args: Array<String>){
     println("类实例：${Client("a", 1123)}，${Client2("a", 1123)}")
     val set: Set<Client2> = hashSetOf(Client2("1", 111))
     println("set中是否已经有：${set.contains(Client2("1", 111))}")
+
+    println("对象声明：${AA.compare(File("/User"), File("/user"))}")
+    AAA.a()
+
+    val a222 = object : MyUser33{
+        override val email: String
+            get() = "邮箱="
+
+    }.email
+    println(a222)
+}
+
+class MyUser1{
+    val nickName: String
+
+    constructor(name: String){
+        nickName = name
+    }
+}
+
+class AAA{
+    companion object{
+        fun a(){
+            println("伴生对象")
+        }
+    }
+}
+
+data class AA(val name: String){
+    private val a: String = ""
+
+    private fun aa(){
+
+    }
+
+    companion object CassComparator: Comparator<File>{
+        override fun compare(p0: File, p1: File): Int {
+            return p0.path.compareTo(p1.path, ignoreCase = true)
+        }
+
+    }
+}
+
+object Payroll : MyUser("3333") {
+
+    internal val allEmployees = arrayListOf<Person1>()
+    init {
+
+    }
+    fun cal(){
+        for (person in allEmployees){
+
+        }
+    }
 }
 
 data class Client2(val name: String, val postalCode: Int)
 
 class Client(val name: String, val postalCode: Int){
+    private lateinit var aa: String
+    constructor(aname: String, apostalCode: Int, aa: String): this(aname, apostalCode){
+        this.aa = aa
+    }
 
     override fun hashCode(): Int {
         return name.hashCode() * 31 + postalCode
