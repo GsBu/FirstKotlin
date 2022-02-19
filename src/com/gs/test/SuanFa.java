@@ -13,6 +13,8 @@ public class SuanFa {
         lengthOfLongestSubstring("abcabcbb");
 
         myAtoi("  -0012a42");
+        int[] a = new int[]{3,2,4,1};
+        pancakeSort(a);
     }
 
     public static char callKotlin() {
@@ -232,5 +234,41 @@ public class SuanFa {
             }
         }
         return a;
+    }
+
+    //969. 煎饼排序
+    public static List<Integer> pancakeSort(int[] arr) {
+        List<Integer> list = new ArrayList<>();
+        int max = 0, maxIndex = 0;
+
+        for(int a = 0; a < arr.length; a++){
+            max = 0;
+            maxIndex = 0;
+            for (int i = 0; i < arr.length - a; i++){
+                if(max < arr[i]){
+                    max = arr[i];
+                    maxIndex = i;
+                }
+            }
+            if(maxIndex == arr.length - a - 2){
+                continue;
+            }
+
+            list.add(maxIndex + 1);
+            int b;
+            for (int n = 0; n < maxIndex / 2 + 1; n++){
+                b = arr[n];
+                arr[n] = arr[maxIndex - n];
+                arr[maxIndex - n] = b;
+            }
+            list.add(arr.length - a);
+            for (int n = 0; n < (arr.length - a) / 2; n++){
+                b = arr[n];
+                arr[n] = arr[arr.length - a - n - 1];
+                arr[arr.length - a - n - 1] = b;
+            }
+        }
+
+        return list;
     }
 }
