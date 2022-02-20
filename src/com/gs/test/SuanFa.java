@@ -271,4 +271,36 @@ public class SuanFa {
 
         return list;
     }
+
+    //717. 1比特与2比特字符
+    public boolean isOneBitCharacter(int[] bits) {
+        if(bits.length < 1){
+            return false;
+        }
+        if(bits.length == 1){
+            if(bits[0] == 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        if(bits.length == 2){
+            if(bits[0] == 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        for(int i = 0; i < bits.length; i++){
+            if(bits[i] == 1){
+                i++;
+            }else {
+                if(i == bits.length - 1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
