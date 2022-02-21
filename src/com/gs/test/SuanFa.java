@@ -15,6 +15,8 @@ public class SuanFa {
         myAtoi("  -0012a42");
         int[] a = new int[]{3,2,4,1};
         pancakeSort(a);
+
+        pushDominoes("RR.L");
     }
 
     public static char callKotlin() {
@@ -274,24 +276,6 @@ public class SuanFa {
 
     //717. 1比特与2比特字符
     public boolean isOneBitCharacter(int[] bits) {
-        if(bits.length < 1){
-            return false;
-        }
-        if(bits.length == 1){
-            if(bits[0] == 0){
-                return true;
-            }else{
-                return false;
-            }
-        }
-        if(bits.length == 2){
-            if(bits[0] == 0){
-                return true;
-            }else{
-                return false;
-            }
-        }
-
         for(int i = 0; i < bits.length; i++){
             if(bits[i] == 1){
                 i++;
@@ -302,5 +286,65 @@ public class SuanFa {
             }
         }
         return false;
+    }
+
+    //838. 推多米诺
+    public static String pushDominoes(String dominoes) {
+        char[] onlyLeft = dominoes.toCharArray(), onlyRight = dominoes.toCharArray();
+        int l = 0, r = dominoes.length() - 1;
+        boolean hasLeft = false, hasRight = false;
+        while (l < dominoes.length()){
+            if(dominoes.charAt(l) == 'R'){
+                hasRight = true;
+            }else if(dominoes.charAt(l) == 'L'){
+                hasRight = false;
+            }
+            if(dominoes.charAt(l) == '.' && hasRight){
+                onlyRight[l] = 'R';
+            }
+            l++;
+
+            if(dominoes.charAt(r) == 'L'){
+                hasLeft = true;
+            }else if(dominoes.charAt(r) == 'R'){
+                hasLeft = false;
+            }
+            if(dominoes.charAt(r) == '.' && hasLeft){
+                onlyLeft[r] = 'L';
+            }
+            r--;
+        }
+        int start = -1;
+        for (int i = 0; i < dominoes.length(); i++){
+
+            if(onlyRight[i] == '.'){
+                onlyRight[i] = onlyLeft[i];
+            }else if(onlyRight[i] == 'R'){
+                if(onlyLeft[i] == 'L'){
+                    if(start == -1) {
+                        start = i;
+                    }
+                    continue;
+                }
+            }else if(onlyRight[i] == 'L'){
+                if(start != -1) {
+                    int end = i - 1;
+                    if(end == start){
+                        onlyRight[start] = '.';
+                    }
+                    while (start < end){
+                        onlyRight[start] = 'R';
+                        onlyRight[end] = 'L';
+                        start++;
+                        end--;
+                        if(end == start){
+                            onlyRight[start] = '.';
+                        }
+                    }
+                    start = -1;
+                }
+            }
+        }
+        return new String(onlyRight);
     }
 }
