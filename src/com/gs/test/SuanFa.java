@@ -347,4 +347,23 @@ public class SuanFa {
         }
         return new String(onlyRight);
     }
+
+    //27. 移除元素
+    public int removeElement(int[] nums, int val) {
+        int l = 0, r = nums.length - 1;
+        while (l <= r){
+            if(val == nums[l]){
+                if(val == nums[r]){
+                    r--;
+                }else {
+                    nums[l] = nums[r];
+                    r--;
+                }
+            }else {
+                l++;
+            }
+        }
+
+        return l;
+    }
 }
