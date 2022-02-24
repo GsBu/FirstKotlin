@@ -450,4 +450,29 @@ public class SuanFa {
             this.next = next;
         }
     }
+
+    //1704. 判断字符串的两半是否相似
+    public boolean halvesAreAlike(String s) {
+        int leftCount = 0, rightCount = 0;
+        int leftIndex = 0, rightIndex = s.length() - 1;
+        while (leftIndex < rightIndex){
+            if(isYuan(s.charAt(leftIndex))){
+                leftCount++;
+            }
+            if(isYuan(s.charAt(rightIndex))){
+                rightCount++;
+            }
+            leftIndex ++;
+            rightIndex --;
+        }
+        return leftCount == rightCount;
+    }
+
+    private static boolean isYuan(char c){
+        if(c == 'A' || c == 'a' || c == 'e' || c == 'E' || c == 'i' ||
+                c == 'I' || c == 'o' || c == 'O' || c == 'u' || c == 'U'){
+            return true;
+        }
+        return false;
+    }
 }
