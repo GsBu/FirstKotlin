@@ -17,6 +17,27 @@ public class SuanFa {
         pancakeSort(a);
 
         pushDominoes("RR.L");
+        reverseOnlyLetters("ab-cd");
+
+        System.out.println("合并链表");
+
+        ListNode l1 = new ListNode(1);
+        ListNode l12 = new ListNode(5);
+        ListNode l13 = new ListNode(6);
+        l1.next = l12;
+        l12.next = l13;
+
+        ListNode l2 = new ListNode(1);
+        ListNode l22 = new ListNode(3);
+        ListNode l23 = new ListNode(6);
+
+        l2.next = l22;
+        l22.next = l23;
+        ListNode listNode = mergeTwoLists(l1, l2);
+        while (listNode != null){
+            System.out.println(listNode.val);
+            listNode = listNode.next;
+        }
     }
 
     public static char callKotlin() {
@@ -365,5 +386,68 @@ public class SuanFa {
         }
 
         return l;
+    }
+
+    //917. 仅仅反转字母
+    public static String reverseOnlyLetters(String s) {
+        int left = 0, right = s.length() - 1;
+        char[] array = s.toCharArray();
+        char snap = '0';
+        while (left < right){
+            if(isZiMu(array[left])){
+                if(isZiMu(array[right])){
+                    snap = array[right];
+                    array[right] = array[left];
+                    array[left] = snap;
+                    left++;
+                }
+                right--;
+            }else {
+                left++;
+            }
+        }
+        return new String(array);
+    }
+
+    private static boolean isZiMu(char a){
+        if(('a' <= a && a <= 'z') || ('A' <= a && a <= 'Z')){
+            return true;
+        }
+        return false;
+    }
+
+    //21. 合并两个有序链表
+    public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if(list1 == null){
+            return list2;
+        }
+        if(list2 == null){
+            return list1;
+        }
+
+        if(list1.val > list2.val){
+            list2.next = mergeTwoLists(list1, list2.next);
+            return list2;
+        }else {
+            list1.next = mergeTwoLists(list1.next, list2);
+            return list1;
+        }
+    }
+
+    public static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
     }
 }
