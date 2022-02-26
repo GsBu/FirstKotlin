@@ -475,4 +475,19 @@ public class SuanFa {
         }
         return false;
     }
+
+    //2016. 增量元素之间的最大差值
+    public int maximumDifference(int[] nums) {
+        int result = -1;
+        for (int i = 0; i < nums.length; i++){
+            for (int j = i + 1; j < nums.length; j++){
+                if(nums[j] > nums[i]){
+                    if(result < nums[j] - nums[i]) {
+                        result = nums[j] - nums[i];
+                    }
+                }
+            }
+        }
+        return result;
+    }
 }
