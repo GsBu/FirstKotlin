@@ -38,6 +38,10 @@ public class SuanFa {
             System.out.println(listNode.val);
             listNode = listNode.next;
         }
+
+        int[] a1 = new int[]{1, 2};
+        int[] a2 = new int[]{3, 4};
+        findMedianSortedArrays(a1, a2);
     }
 
     public static char callKotlin() {
@@ -489,5 +493,119 @@ public class SuanFa {
             }
         }
         return result;
+    }
+
+    //4. 寻找两个正序数组的中位数
+    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        ArrayList<Double> result = new ArrayList();
+        int a = 0, b = 0;
+        while (a < nums1.length || b < nums2.length){
+            if(a == nums1.length){
+                result.add((double)nums2[b]);
+                b++;
+                continue;
+            }
+            if(b == nums2.length){
+                result.add((double)nums1[a]);
+                a++;
+                continue;
+            }
+
+            if(nums1[a] < nums2[b]){
+                result.add((double)nums1[a]);
+                a++;
+            }else {
+                result.add((double)nums2[b]);
+                b++;
+            }
+        }
+        int i = (nums1.length + nums2.length) % 2;
+        if(i == 0){
+            return (result.get((nums1.length + nums2.length) / 2) + result.get((nums1.length + nums2.length) / 2 - 1)) / 2.0;
+        }else {
+            return result.get((nums1.length + nums2.length) / 2);
+        }
+    }
+
+    public static double findMedianSortedArrays2(int[] nums1, int[] nums2) {
+        int count = nums1.length + nums2.length;
+        int index = 0, left = 0, right = 0;
+        int a1 = 0, a2 = 0;
+
+        while (index <= count / 2){
+            a2 = a1;
+            if(left == nums1.length){
+                a1 = nums2[right];
+                right++;
+                index++;
+                continue;
+            }
+            if(right == nums2.length){
+                a1 = nums1[left];
+                left++;
+                index++;
+                continue;
+            }
+            if(nums1[left] < nums2[right]){
+                a1 = nums1[left];
+                left++;
+            }else {
+                a1 = nums2[right];
+                right++;
+            }
+            index++;
+        }
+
+        if(count % 2 == 0){
+            return (a1 + a2) / 2.0;
+        }else {
+            return a1;
+        }
+    }
+
+    public static double findMedianSortedArrays3(int[] nums1, int[] nums2) {
+        int length1 = nums1.length, length2 = nums2.length;
+        int totalLength = length1 + length2;
+        if (totalLength % 2 == 1) {
+            int midIndex = totalLength / 2;
+            double median = getKthElement(nums1, nums2, midIndex + 1);
+            return median;
+        } else {
+            int midIndex1 = totalLength / 2 - 1, midIndex2 = totalLength / 2;
+            double median = (getKthElement(nums1, nums2, midIndex1 + 1) + getKthElement(nums1, nums2, midIndex2 + 1)) / 2.0;
+            return median;
+        }
+    }
+
+    public static int getKthElement(int[] nums1, int[] nums2, int k) {
+        int length1 = nums1.length, length2 = nums2.length;
+        int index1 = 0, index2 = 0;
+        int kthElement = 0;
+
+        while (true) {
+            // 边界情况
+            if (index1 == length1) {
+                return nums2[index2 + k - 1];
+            }
+            if (index2 == length2) {
+                return nums1[index1 + k - 1];
+            }
+            if (k == 1) {
+                return Math.min(nums1[index1], nums2[index2]);
+            }
+
+            // 正常情况
+            int half = k / 2;
+            int newIndex1 = Math.min(index1 + half, length1) - 1;
+            int newIndex2 = Math.min(index2 + half, length2) - 1;
+            int pivot1 = nums1[newIndex1], pivot2 = nums2[newIndex2];
+            if (pivot1 <= pivot2) {
+                k -= (newIndex1 - index1 + 1);
+                index1 = newIndex1 + 1;
+            } else {
+                k -= (newIndex2 - index2 + 1);
+                index2 = newIndex2 + 1;
+            }
+        }
     }
 }
