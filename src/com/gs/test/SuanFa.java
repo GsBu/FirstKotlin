@@ -42,6 +42,8 @@ public class SuanFa {
         int[] a1 = new int[]{1, 2};
         int[] a2 = new int[]{3, 4};
         findMedianSortedArrays(a1, a2);
+
+        reverse(-2147483648);
     }
 
     public static char callKotlin() {
@@ -607,5 +609,28 @@ public class SuanFa {
                 index2 = newIndex2 + 1;
             }
         }
+    }
+
+    //7. 整数反转
+    public static int reverse(int x) {
+        Queue<Integer> queue = new ArrayDeque<>();
+
+        while (true){
+            queue.add(x % 10);
+            if(Math.abs((long)x) < 10){
+                break;
+            }
+            x = x / 10;
+        }
+
+        x = queue.poll();
+        while (!queue.isEmpty()){
+            if(x * 10l > Integer.MAX_VALUE || x * 10l < Integer.MIN_VALUE){
+                return 0;
+            }
+            x = x * 10 + queue.poll();
+        }
+
+        return x;
     }
 }
