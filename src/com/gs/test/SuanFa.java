@@ -14,6 +14,7 @@ public class SuanFa {
 
         myAtoi("  -0012a42");
         int[] a = new int[]{5,7,3,2,4,1,2,9,1};
+        xuanze(a);
         maopao(a);
         pancakeSort(a);
 
@@ -657,14 +658,18 @@ public class SuanFa {
 
     //选择排序
     public static void xuanze(int[] a){
-        int snap;
+        int snap, index = -1;
         for (int i = 0; i < a.length; i++){
+            index = i;
             for (int j = i + 1; j < a.length; j++){
-                if(a[i] > a[j]){
-                    snap = a[i];
-                    a[i] = a[j];
-                    a[j] = snap;
+                if(a[index] > a[j]){
+                    index = j;
                 }
+            }
+            if(i != index){
+                snap = a[i];
+                a[i] = a[index];
+                a[index] = snap;
             }
         }
         System.out.println("\n+++选择排序");
