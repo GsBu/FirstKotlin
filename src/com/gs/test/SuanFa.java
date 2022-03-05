@@ -13,7 +13,8 @@ public class SuanFa {
         lengthOfLongestSubstring("abcabcbb");
 
         myAtoi("  -0012a42");
-        int[] a = new int[]{3,2,4,1};
+        int[] a = new int[]{5,7,3,2,4,1,2,9,1};
+        maopao(a);
         pancakeSort(a);
 
         pushDominoes("RR.L");
@@ -44,6 +45,7 @@ public class SuanFa {
         findMedianSortedArrays(a1, a2);
 
         reverse(-2147483648);
+        System.out.println("递归"+digui(168, 626));
     }
 
     public static char callKotlin() {
@@ -632,5 +634,63 @@ public class SuanFa {
         }
 
         return x;
+    }
+
+    //递归
+    public static int digui(int hight, int wight){
+        int a, b;
+        if(hight > wight){
+            a = hight;
+            b = wight;
+        }else {
+            a = wight;
+            b = hight;
+        }
+
+        int c = a % b;
+        if(c == 0){
+            return b;
+        }else {
+            return digui(c, b);
+        }
+    }
+
+    //选择排序
+    public static void xuanze(int[] a){
+        int snap;
+        for (int i = 0; i < a.length; i++){
+            for (int j = i + 1; j < a.length; j++){
+                if(a[i] > a[j]){
+                    snap = a[i];
+                    a[i] = a[j];
+                    a[j] = snap;
+                }
+            }
+        }
+        System.out.println("\n+++选择排序");
+        for (int i = 0; i < a.length; i++){
+            System.out.print(" " + a[i]);
+        }
+        System.out.println("\n---选择排序");
+    }
+
+    //选择排序
+    public static void maopao(int[] a){
+        int snap;
+        for (int i = a.length; i > 0; i--){
+            for (int j = 0; j + 1 < i; j++){
+                if(a[j] > a[j + 1]){
+                    snap = a[j + 1];
+                    a[j + 1] = a[j];
+                    a[j] = snap;
+                }
+            }
+        }
+
+        System.out.println("\n+++冒泡排序");
+        for (int i = 0; i < a.length; i++){
+            System.out.print(" " + a[i]);
+        }
+        System.out.println("\n---冒泡排序");
     }
 }
