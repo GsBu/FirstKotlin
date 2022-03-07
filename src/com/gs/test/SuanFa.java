@@ -698,4 +698,15 @@ public class SuanFa {
         }
         System.out.println("\n---冒泡排序");
     }
+
+    //53. 最大子数组和
+    public int maxSubArray(int[] nums) {
+        int result = nums[0], preMax = 0;
+        for (int i : nums){
+            preMax = preMax + i;
+            preMax = Math.max(preMax, i);
+            result = Math.max(preMax, result);
+        }
+        return result;
+    }
 }
