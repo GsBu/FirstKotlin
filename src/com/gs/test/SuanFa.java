@@ -47,6 +47,10 @@ public class SuanFa {
 
         reverse(-2147483648);
         System.out.println("递归"+digui(168, 626));
+        System.out.println(countDigitOne(824883294));
+
+        String ss = "rfffxrogytyg";
+        System.out.println(longestPalindrome(ss));
 
         int[] a11 = new int[]{3,2,1};
         nextPermutation(a11);
@@ -791,5 +795,63 @@ public class SuanFa {
                 nums[index] = snap;
             }
         }
+    }
+    //233. 数字 1 的个数
+    public static int countDigitOne(int n) {
+        int count = 0;
+        int snap;
+        for(int i = n; i > 0; i--){
+            snap = i;
+            while (snap != 0) {
+                if (snap % 10 == 1) {
+                    count++;
+                }
+                snap = snap / 10;
+            }
+        }
+        return count;
+    }
+
+    //5. 最长回文子串
+    public static String longestPalindrome(String s) {
+        char[] cArray = s.toCharArray();
+        String ret = "", snap = "";
+        int length = cArray.length;
+        for(int i = 0; i < length; i++){
+            snap = cArray[i] + "";
+            int left = 1, right = 1;
+            for (int j = 1; i + j < length; j++){
+                if(cArray[i] == cArray[i+j]){
+                    snap = snap + cArray[i+j];
+                    right = right + 1;
+                }else {
+                    break;
+                }
+            }
+            for(int j = 1; i-j >= 0; j++){
+                if(cArray[i] == cArray[i-j]){
+                    snap = cArray[i-j] + snap;
+                    left = left + 1;
+                }else {
+                    break;
+                }
+            }
+            while (true){
+                if(right + i >= length || i - left < 0){
+                    break;
+                }
+                if(cArray[i + right] == cArray[i - left]){
+                    snap = cArray[i + right] + snap + cArray[i - left];
+                    left++;
+                    right++;
+                }else {
+                    break;
+                }
+            }
+            if(ret.length()<snap.length()){
+                ret = snap;
+            }
+        }
+        return ret;
     }
 }
