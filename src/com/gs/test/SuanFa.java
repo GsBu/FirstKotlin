@@ -724,6 +724,7 @@ public class SuanFa {
 
     //135. 分发糖果
     public int candy(int[] ratings) {
+
         int[] left = new int[ratings.length];
         for (int i = 0; i < left.length; i++) {
             if (i > 0 && ratings[i] > ratings[i - 1]) {
