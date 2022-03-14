@@ -47,6 +47,9 @@ public class SuanFa {
 
         reverse(-2147483648);
         System.out.println("递归"+digui(168, 626));
+
+        int[] a11 = new int[]{3,2,1};
+        nextPermutation(a11);
     }
 
     public static char callKotlin() {
@@ -745,5 +748,48 @@ public class SuanFa {
             ret += Math.max(right, left[i]);
         }
         return ret;
+    }
+
+    //31. 下一个排列
+    public static void nextPermutation(int[] nums) {
+        if(nums.length < 2){
+            return;
+        }
+        int snap = 0, index = 0;
+
+        int i = nums.length - 2, j = nums.length - 1;
+        while (i >= 0){
+            if(nums[i] < nums[j]){
+                break;
+            }
+            i--;
+            j--;
+        }
+
+        if(i > 0) {
+            int k = 0;
+            for (k = nums.length - 1; k > i; k--) {
+                if (nums[k] > nums[i]) {
+                    snap = nums[k];
+                    nums[k] = nums[i];
+                    nums[i] = snap;
+                    break;
+                }
+            }
+        }
+
+        for (int a = i + 1; a < nums.length; a++){
+            index = a;
+            for (int b = a + 1; b < nums.length; b++){
+                if(nums[index] > nums[b]){
+                    index = b;
+                }
+            }
+            if(a != index){
+                snap = nums[a];
+                nums[a] = nums[index];
+                nums[index] = snap;
+            }
+        }
     }
 }

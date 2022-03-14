@@ -33,6 +33,12 @@ fun main(args: Array<String>){
 
     }.email
     println(a222)
+
+    println("字符串长度=${strLen(null)}")
+}
+
+fun strLen(s: String?): Int?{
+    return s?.length
 }
 
 class MyUser1{
