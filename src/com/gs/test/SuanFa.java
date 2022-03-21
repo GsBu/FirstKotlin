@@ -854,4 +854,44 @@ public class SuanFa {
         }
         return ret;
     }
+
+    //229. 求众数 II
+    public List<Integer> majorityElement(int[] nums) {
+        int x = 0,y = 0;
+        int a1=0,a2=0;
+        for (int num : nums){
+            if(a1 > 0 && x == num){
+                a1++;
+            }else if(a2 > 0 && y == num){
+                a2++;
+            }else if(a1 == 0){
+                x = num;
+                a1++;
+            }else if(a2 == 0){
+                y = num;
+                a2++;
+            }else {
+                a1--;
+                a2--;
+            }
+        }
+
+        int count1 = 0, count2 = 0;
+        for(int num : nums){
+            if(x == num){
+                count1++;
+            }else if(y == num){
+                count2++;
+            }
+        }
+
+        List<Integer> list = new ArrayList<>();
+        if(count1>nums.length/3){
+            list.add(x);
+        }
+        if(count2>nums.length/3){
+            list.add(y);
+        }
+        return list;
+    }
 }
