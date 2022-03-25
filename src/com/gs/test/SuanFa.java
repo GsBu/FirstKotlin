@@ -54,6 +54,8 @@ public class SuanFa {
 
         int[] a11 = new int[]{3,2,1};
         nextPermutation(a11);
+
+        System.out.println("爬楼梯："+paLouTi(10));
     }
 
     public static char callKotlin() {
@@ -893,5 +895,16 @@ public class SuanFa {
             list.add(y);
         }
         return list;
+    }
+
+    //动态规划 爬楼梯
+    public static int paLouTi(int n){
+        if(n == 1){
+            return 1;
+        }
+        if(n == 2){
+            return 2;
+        }
+        return paLouTi(n-1) + paLouTi(n - 2);
     }
 }
