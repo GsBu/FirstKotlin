@@ -55,7 +55,7 @@ public class SuanFa {
         int[] a11 = new int[]{3,2,1};
         nextPermutation(a11);
 
-        System.out.println("爬楼梯："+paLouTi(10));
+        System.out.println("爬楼梯："+paLouTi2(10));
     }
 
     public static char callKotlin() {
@@ -906,5 +906,23 @@ public class SuanFa {
             return 2;
         }
         return paLouTi(n-1) + paLouTi(n - 2);
+    }
+
+    //动态规划 爬楼梯优化
+    private static HashMap<Integer, Integer> map = new HashMap();
+    public static int paLouTi2(int n){
+        if(n == 1){
+            return 1;
+        }
+        if(n == 2){
+            return 2;
+        }
+
+        if(map.containsKey(n)){
+            return map.get(n);
+        }else {
+            map.put(n, paLouTi2(n-1) + paLouTi2(n - 2));
+        }
+        return map.get(n);
     }
 }
