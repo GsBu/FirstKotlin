@@ -55,7 +55,7 @@ public class SuanFa {
         int[] a11 = new int[]{3,2,1};
         nextPermutation(a11);
 
-        System.out.println("爬楼梯："+paLouTi2(10));
+        System.out.println("爬楼梯："+paLouTi3(10));
     }
 
     public static char callKotlin() {
@@ -924,5 +924,16 @@ public class SuanFa {
             map.put(n, paLouTi2(n-1) + paLouTi2(n - 2));
         }
         return map.get(n);
+    }
+    //动态规划 爬楼梯再优化
+    public static int paLouTi3(int n){
+        int result = 0;
+        int a1 = 1, a2 = 2;
+        for(int i = 3;i<=n;i++){
+            result = a1 + a2;
+            a1 = a2;
+            a2 = result;
+        }
+        return result;
     }
 }
