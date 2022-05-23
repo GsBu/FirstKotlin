@@ -43,19 +43,21 @@ public class SuanFa {
 
         int[] a1 = new int[]{1, 2};
         int[] a2 = new int[]{3, 4};
-        findMedianSortedArrays(a1, a2);
+        //findMedianSortedArrays(a1, a2);
 
         reverse(-2147483648);
         System.out.println("递归"+digui(168, 626));
-        System.out.println(countDigitOne(824883294));
+        //System.out.println(countDigitOne(824883294));
 
         String ss = "rfffxrogytyg";
-        System.out.println(longestPalindrome(ss));
+        //System.out.println(longestPalindrome(ss));
 
         int[] a11 = new int[]{3,2,1};
-        nextPermutation(a11);
+        //nextPermutation(a11);
 
         System.out.println("爬楼梯："+paLouTi3(10));
+
+        System.out.println("全队列："+permute(a11));
     }
 
     public static char callKotlin() {
@@ -935,5 +937,40 @@ public class SuanFa {
             a2 = result;
         }
         return result;
+    }
+    //快速排序
+
+    //46. 全排列
+    public static List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> lists = new ArrayList<>();
+        int length = nums.length;
+        if(length == 0){
+            return lists;
+        }
+
+        List<Integer> path = new ArrayList<>();
+        boolean[] used = new boolean[length];
+
+        dfs(nums, length, 0, path, used, lists);
+        return lists;
+    }
+
+    public static void dfs(int[] nums, int length, int depth,  List<Integer> path, boolean[] used, List<List<Integer>> lists){
+        if(length == depth){
+            lists.add(new ArrayList<>(path));
+            return ;
+        }
+
+        for(int i = 0; i < length; i++){
+            if(!used[i]){
+                path.add(nums[i]);
+                used[i] = true;
+
+                dfs(nums, length, depth + 1, path, used, lists);
+
+                used[i] = false;
+                path.remove(path.size() - 1);
+            }
+        }
     }
 }
