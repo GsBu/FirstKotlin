@@ -52,12 +52,17 @@ public class SuanFa {
         String ss = "rfffxrogytyg";
         //System.out.println(longestPalindrome(ss));
 
-        int[] a11 = new int[]{3,2,1};
+        int[] a11 = new int[]{6,3,2,1,7,8,9,4,9};
         //nextPermutation(a11);
 
         System.out.println("爬楼梯："+paLouTi3(10));
 
-        System.out.println("全队列："+permute(a11));
+       //System.out.println("全队列："+permute(a11));
+
+        System.out.println("快速排序：");
+        for (int aa: quick(a11, 0, a11.length - 1, a11[0])){
+            System.out.print(" "+aa);
+        }
     }
 
     public static char callKotlin() {
@@ -938,7 +943,42 @@ public class SuanFa {
         }
         return result;
     }
-    //快速排序
+
+    //快速排序-自己实现-双边循环
+    public static int[] quick(int[] nums, int left, int right, int point){
+        int start = left;
+        int end = right;
+        if(left >= right){
+            return nums;
+        }
+
+        while (left != right){
+            if(nums[right] >= point){
+                right--;
+                continue;
+            }
+            if(nums[left] <= point){
+                left++;
+                continue;
+            }
+            int a = nums[left];
+            nums[left] = nums[right];
+            nums[right] = a;
+        }
+
+        int a = nums[start];
+        nums[start] = nums[left];
+        nums[left] = a;
+
+        if(left - 1 >= 0) {
+            quick(nums, start, left - 1, nums[start]);
+        }
+        if(left + 1 < nums.length) {
+            quick(nums, left + 1, end, nums[left + 1]);
+        }
+
+        return nums;
+    }
 
     //46. 全排列
     public static List<List<Integer>> permute(int[] nums) {
