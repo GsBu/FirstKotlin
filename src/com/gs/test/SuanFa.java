@@ -63,6 +63,10 @@ public class SuanFa {
         for (int aa: quick(a11, 0, a11.length - 1, a11[0])){
             System.out.print(" "+aa);
         }
+        System.out.println("\n快速排序2：");
+        for (int aa: quick2(a11, 0, a11.length - 1)){
+            System.out.print(" "+aa);
+        }
     }
 
     public static char callKotlin() {
@@ -975,6 +979,39 @@ public class SuanFa {
         }
         if(left + 1 < nums.length) {
             quick(nums, left + 1, end, nums[left + 1]);
+        }
+
+        return nums;
+    }
+
+    //快速排序-自己实现-单边循环
+    public static int[] quick2(int[] nums, int start, int end){
+        int point = nums[start];
+
+        if(start >= end){
+            return nums;
+        }
+
+        int mark = start;
+        for(int i = start + 1; i <= end; i++){
+            if(nums[i] >= point){
+                continue;
+            }else {
+                mark++;
+                int a = nums[mark];
+                nums[mark] = nums[i];
+                nums[i] = a;
+            }
+        }
+
+        nums[start] = nums[mark];
+        nums[mark] = point;
+
+        if(mark - 1 >= 0) {
+            quick2(nums, start, mark - 1);
+        }
+        if(mark + 1 < nums.length) {
+            quick2(nums, mark + 1, end);
         }
 
         return nums;
