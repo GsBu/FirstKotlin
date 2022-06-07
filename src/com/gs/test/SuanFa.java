@@ -1065,4 +1065,28 @@ public class SuanFa {
         }
         return false;
     }
+
+    //有环链表的环长
+    public static int cycleCount(ListNode listNode) {
+        ListNode p1 = listNode;
+        ListNode p2 = listNode;
+        int i = 0;
+        boolean mark = false;
+
+        while (p2 != null && p2.next != null){
+            p1 = p1.next;
+            p2 = p2.next.next;
+            if(p1 == p2){
+                if(mark){
+                    return i;
+                }else {
+                    mark = true;
+                }
+            }
+            if(mark){
+                i++;
+            }
+        }
+        return 0;
+    }
 }
