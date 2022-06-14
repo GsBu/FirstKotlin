@@ -43,6 +43,10 @@ fun main(args: Array<String>){
 
     val reader = BufferedReader(StringReader("是撒"))
     println("读取的数据=${readNumber(reader)}")
+
+    Thread{
+        println("Lambda")
+    }.start()
 }
 
 fun readNumber(reader: BufferedReader) {
