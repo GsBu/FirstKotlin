@@ -71,6 +71,14 @@ public class SuanFa {
         System.out.println("\n辗转相除法求最大公约数："+zhanZhuan(15, 25));
         System.out.println("更相减损术求最大公约数："+gengXiang(15, 25));
         System.out.println("最优解求最大公约数："+zuiYou(13, 26));
+
+        MinStack minStack = new MinStack();
+        minStack.pushMinStack(3);
+        minStack.pushMinStack(5);
+        minStack.pushMinStack(2);
+        minStack.popMinStack();
+        minStack.pushMinStack(2);
+        System.out.println("\n栈中最小元素："+minStack.getMin());
     }
 
     public static char callKotlin() {
@@ -1141,5 +1149,43 @@ public class SuanFa {
      */
     public static boolean zhengShuMi(int a){
         return (a & a-1) == 0;
+    }
+
+    /**
+     * 最小栈（返回栈中最小值）
+     */
+    public static class MinStack{
+        private Stack<Integer> stack = new Stack<>();
+        private Stack<Integer> stackMin = new Stack<>();
+        private int min = 0;
+
+        public void pushMinStack(int a){
+            if(stack.isEmpty()){
+                min = a;
+                stackMin.push(a);
+            }
+
+            if(a <= min){
+                stackMin.push(a);
+                min = a;
+            }
+            stack.push(a);
+        }
+
+        public int popMinStack(){
+            if(stack.peek() <= stackMin.peek()){
+                stackMin.pop();
+            }
+            return stack.pop();
+        }
+
+        public int getMin(){
+            int a;
+            a = stack.peek();
+            if(!stackMin.isEmpty() && a >= stackMin.peek()){
+                a = stackMin.peek();
+            }
+            return a;
+        }
     }
 }
