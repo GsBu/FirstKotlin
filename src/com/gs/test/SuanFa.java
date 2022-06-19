@@ -67,6 +67,10 @@ public class SuanFa {
         for (int aa: quick2(a11, 0, a11.length - 1)){
             System.out.print(" "+aa);
         }
+
+        System.out.println("\n辗转相除法求最大公约数："+zhanZhuan(15, 25));
+        System.out.println("更相减损术求最大公约数："+gengXiang(15, 25));
+        System.out.println("最优解求最大公约数："+zuiYou(13, 26));
     }
 
     public static char callKotlin() {
@@ -1088,5 +1092,45 @@ public class SuanFa {
             }
         }
         return 0;
+    }
+
+    //求最大公约数-辗转相除法(欧几里得算法)
+    public static int zhanZhuan(int a, int b){
+        int big = a > b ? a : b;
+        int small = a < b ? a : b;
+        if(big % small == 0){
+            return small;
+        }
+
+        return zhanZhuan(small, big % small);
+    }
+
+    //求最大公约数-更相减损术
+    public static int gengXiang(int a, int b){
+        if(a == b){
+            return a;
+        }
+        int big = a > b ? a : b;
+        int small = a < b ? a : b;
+
+        return gengXiang(small, big - small);
+    }
+
+    //求最大公约数-最优解
+    public static int zuiYou(int a, int b){
+        if (a == b) {
+            return a;
+        }
+        if ((a & 1) == 0 && (b & 1) == 0) {
+            return zuiYou(a >> 1, b >> 1) << 1;
+        } else if ((a & 1) == 0 && (b & 1) != 0) {
+            return zuiYou(a >> 1, b);
+        } else if ((a & 1) != 0 && (b & 1) == 0) {
+            return zuiYou(a, b >> 1);
+        } else {
+            int big = a > b ? a : b;
+            int small = a < b ? a : b;
+            return zuiYou(big - small, small);
+        }
     }
 }
