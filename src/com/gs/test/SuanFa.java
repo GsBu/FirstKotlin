@@ -1133,4 +1133,13 @@ public class SuanFa {
             return zuiYou(big - small, small);
         }
     }
+
+    /**
+     * 判断整数是否是2的整数次幂
+     * @param a
+     * @return
+     */
+    public static boolean zhengShuMi(int a){
+        return (a & a-1) == 0;
+    }
 }
