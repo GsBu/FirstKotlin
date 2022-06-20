@@ -73,12 +73,16 @@ public class SuanFa {
         System.out.println("最优解求最大公约数："+zuiYou(13, 26));
 
         MinStack minStack = new MinStack();
-        minStack.pushMinStack(3);
-        minStack.pushMinStack(5);
-        minStack.pushMinStack(2);
-        minStack.popMinStack();
-        minStack.pushMinStack(2);
-        System.out.println("\n栈中最小元素："+minStack.getMin());
+        minStack.pushMinStack2(4);
+        minStack.pushMinStack2(5);
+        minStack.pushMinStack2(2);
+        minStack.popMinStack2();
+        minStack.pushMinStack2(3);
+        try {
+            System.out.println("\n栈中最小元素："+minStack.getMin2());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static char callKotlin() {
@@ -1172,8 +1176,23 @@ public class SuanFa {
             stack.push(a);
         }
 
+        public void pushMinStack2(int a){
+            stack.push(a);
+            //如果辅助栈为空，或者新元素小于或等于辅助栈栈顶，新元素入辅助栈
+            if(stackMin.empty() || a <= stackMin.peek()){
+                stackMin.push(a);
+            }
+        }
+
         public int popMinStack(){
             if(stack.peek() <= stackMin.peek()){
+                stackMin.pop();
+            }
+            return stack.pop();
+        }
+
+        public int popMinStack2(){
+            if(stack.peek().equals(stackMin.peek())){
                 stackMin.pop();
             }
             return stack.pop();
@@ -1186,6 +1205,13 @@ public class SuanFa {
                 a = stackMin.peek();
             }
             return a;
+        }
+
+        public int getMin2() throws Exception{
+            if(stack.empty()){
+                throw new Exception("栈为空");
+            }
+            return stackMin.peek();
         }
     }
 }
