@@ -83,6 +83,19 @@ public class SuanFa {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        try {
+            StackToQueue stackToQueue = new StackToQueue();
+            System.out.println("用栈实现队列：入队：" + stackToQueue.inQueue(1));
+            System.out.println("用栈实现队列：入队：" + stackToQueue.inQueue(2));
+            System.out.println("用栈实现队列：入队：" + stackToQueue.inQueue(3));
+            System.out.println("用栈实现队列：出队：" + stackToQueue.outQueue());
+            System.out.println("用栈实现队列：出队：" + stackToQueue.outQueue());
+            System.out.println("用栈实现队列：出队：" + stackToQueue.outQueue());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     public static char callKotlin() {
@@ -1214,4 +1227,32 @@ public class SuanFa {
             return stackMin.peek();
         }
     }
+
+    /**
+     * 用栈实现队列
+     */
+    public static class StackToQueue{
+        private Stack<Integer> inStack = new Stack<>();
+        private Stack<Integer> outStack = new Stack<>();
+
+        public int inQueue(int a){
+            inStack.push(a);
+            return a;
+        }
+
+        public int outQueue() throws Exception{
+            if(inStack.isEmpty() && outStack.isEmpty()){
+                throw new Exception("无数据");
+            }
+
+            if(outStack.isEmpty()){
+                while (!inStack.isEmpty()){
+                    outStack.push(inStack.pop());
+                }
+            }
+
+            return outStack.pop();
+        }
+    }
+
 }
