@@ -96,6 +96,10 @@ public class SuanFa {
             e.printStackTrace();
         }
 
+        int[] intArray = new int[]{1,2,4,6,3,5};
+        findNearestNumber2(intArray);//先调用方法2，因为函数内它没有改变数组。
+        findNearestNumber(intArray);
+
     }
 
     public static char callKotlin() {
@@ -1255,4 +1259,112 @@ public class SuanFa {
         }
     }
 
+    /**
+     * 给出一个正整数，请找出这个正整数所有数字全排列的下一个数。
+     * @param numbers
+     * @return
+     */
+    public static int[] findNearestNumber(int[] numbers){
+        System.out.print("\n给出一个正整数:");
+        for (int i = 0; i<numbers.length;i++){
+            System.out.print(numbers[i]);
+        }
+
+        int index = getIndex(numbers);
+
+        if(index == 0){
+            return null;
+        }
+
+        int min = numbers[index];
+        int minIndex = index;
+        for(int i = index + 1; i < numbers.length; i++){
+            if(min > numbers[i] && numbers[i] > numbers[index - 1]){
+                min = numbers[i];
+                minIndex = i;
+            }
+        }
+
+        numbers[minIndex] = numbers[index - 1];
+        numbers[index - 1] = min;
+
+        int temp = 0;
+        for(int i = index; i < numbers.length; i++){
+            for(int j = i; j < numbers.length - 1; j++){
+                if(numbers[j] > numbers[j + 1]){
+                    temp = numbers[i];
+                    numbers[i] = numbers[j+1];
+                    numbers[j+1] = temp;
+                }
+            }
+        }
+        System.out.print("\n找出这个正整数所有数字全排列的下一个数:");
+        for (int i = 0; i<numbers.length;i++){
+            System.out.print(numbers[i]);
+        }
+        return numbers;
+    }
+
+    private static int getIndex(int[] numbers){
+        for(int i = numbers.length - 1; i > 0; i--){
+            if(numbers[i] > numbers[i - 1]){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+
+    //-------------
+    public static int[] findNearestNumber2(int[] numbers){
+        System.out.print("\n给出一个正整数:");
+        for (int i = 0; i<numbers.length;i++){
+            System.out.print(numbers[i]);
+        }
+
+        int index = findTransferPoint(numbers);
+        if(index == 0){
+            return null;
+        }
+        int[] numbersCopy = Arrays.copyOf(numbers, numbers.length);
+        exchangeHead(numbersCopy, index);
+        reverse(numbersCopy, index);
+
+        System.out.print("\n找出这个正整数所有数字全排列的下一个数:");
+        for (int i = 0; i<numbersCopy.length;i++){
+            System.out.print(numbersCopy[i]);
+        }
+
+        return numbersCopy;
+    }
+    private static int findTransferPoint(int[] numbers){
+        for(int i=numbers.length-1; i>0; i--){
+            if(numbers[i] > numbers[i-1]){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private static int[] exchangeHead(int[] numbers, int index) {
+        int head = numbers[index - 1];
+        for (int i = numbers.length - 1; i > 0; i--) {
+
+            if (head < numbers[i]) {
+                numbers[index - 1] = numbers[i];
+                numbers[i] = head;
+                break;
+            }
+        }
+        return numbers;
+    }
+
+    private static int[] reverse(int[] num, int index) {
+        for (int i = index, j = num.length - 1; i < j; i++, j--) {
+            int temp = num[i];
+            num[i] = num[j];
+            num[j] = temp;
+        }
+        return num;
+    }
 }
