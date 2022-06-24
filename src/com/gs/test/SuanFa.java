@@ -99,7 +99,7 @@ public class SuanFa {
         int[] intArray = new int[]{1,2,4,6,3,5};
         findNearestNumber2(intArray);//先调用方法2，因为函数内它没有改变数组。
         findNearestNumber(intArray);
-
+        deleteMinNumber("10",3);
     }
 
     public static char callKotlin() {
@@ -1366,5 +1366,26 @@ public class SuanFa {
             num[j] = temp;
         }
         return num;
+    }
+
+    public static void deleteMinNumber(String num, int k){
+        System.out.println("原數："+num);
+        for(int i = 0; i < k; i++){
+            char[] chars = num.toCharArray();
+            for (int j = 0; j < chars.length - 1; j++) {
+                if(chars[j] > chars[j+1]){
+                    if(j == 0){
+                        num = num.substring(1, num.length());
+                    }else {
+                        num = num.substring(0, j) + num.substring(j + 1, num.length());
+                    }
+                    break;
+                }
+                if(j == num.length() - 2){
+                    num = num.substring(0, j +1);
+                }
+            }
+        }
+        System.out.println("減去"+k+"個數后，最小的數是："+Integer.parseInt(num));
     }
 }
