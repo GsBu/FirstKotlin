@@ -99,7 +99,8 @@ public class SuanFa {
         int[] intArray = new int[]{1,2,4,6,3,5};
         findNearestNumber2(intArray);//先调用方法2，因为函数内它没有改变数组。
         findNearestNumber(intArray);
-        deleteMinNumber("10",3);
+        deleteMinNumber("12340",3);
+        deleteMinNumber2("12340",3);
     }
 
     public static char callKotlin() {
@@ -1369,7 +1370,7 @@ public class SuanFa {
     }
 
     public static void deleteMinNumber(String num, int k){
-        System.out.println("原數："+num);
+        System.out.print("\n原數："+num);
         for(int i = 0; i < k; i++){
             char[] chars = num.toCharArray();
             for (int j = 0; j < chars.length - 1; j++) {
@@ -1382,10 +1383,38 @@ public class SuanFa {
                     break;
                 }
                 if(j == num.length() - 2){
-                    num = num.substring(0, j +1);
+                    num = num.substring(0, num.length() - 1);
                 }
             }
         }
         System.out.println("減去"+k+"個數后，最小的數是："+Integer.parseInt(num));
+    }
+
+    public static void deleteMinNumber2(String num, int k){
+        System.out.print("\n原數：" + num);
+
+        //新整数的最终长度 =  原整数长度-k
+        int newLength = num.length() - k;
+        //创建一个栈，用于接收所有的数字
+        char[] stack = new char[num.length()];
+        int top = 0;
+        for (int i = 0; i < num.length(); ++i) {
+            //遍历当前数字
+            char c = num.charAt(i);
+            //当栈顶数字大于遍历到的当前数字时，栈顶数字出栈（相当于删除数字）
+            while (top > 0 && stack[top-1] > c && k > 0) {
+                top -= 1;
+                k -= 1;
+            }
+            //遍历到的当前数字入栈
+            stack[top++] = c;
+        }
+        // 找到栈中第1个非零数字的位置，以此构建新的整数字符串
+        int offset = 0;
+        while (offset < newLength && stack[offset] == '0') {
+            offset++;
+        }
+        String result =  offset == newLength? "0": new String(stack, offset, newLength - offset);
+        System.out.println("減去" + k + "個數后，最小的數是：" + result);
     }
 }
