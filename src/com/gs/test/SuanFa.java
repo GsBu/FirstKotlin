@@ -102,6 +102,7 @@ public class SuanFa {
         deleteMinNumber("12340",3);
         deleteMinNumber2("12340",3);
         daShuJia("426709752318", "95481253129");
+        System.out.println("\n动态规划，金矿："+jinKuang(5, 10, new int[]{400, 500, 200, 300, 350}, new int[]{5, 5, 3, 4, 3}));
     }
 
     public static char callKotlin() {
@@ -1463,4 +1464,18 @@ public class SuanFa {
             System.out.print(result[i1]);
         }
     }
+
+    public static int jinKuang(int n, int w, int[] g, int[] p){
+        if(n <= 0 || w <= 0){
+            return 0;
+        }
+
+        if(w < p[n - 1]) {
+            return jinKuang(n - 1, w, g, p);
+        }else {
+            return Math.max(jinKuang(n - 1, w, g, p), jinKuang(n - 1, w - p[n - 1], g, p) + g[n - 1]);
+        }
+
+    }
+
 }
