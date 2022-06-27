@@ -101,6 +101,7 @@ public class SuanFa {
         findNearestNumber(intArray);
         deleteMinNumber("12340",3);
         deleteMinNumber2("12340",3);
+        daShuJia("426709752318", "95481253129");
     }
 
     public static char callKotlin() {
@@ -1416,5 +1417,50 @@ public class SuanFa {
         }
         String result =  offset == newLength? "0": new String(stack, offset, newLength - offset);
         System.out.println("減去" + k + "個數后，最小的數是：" + result);
+    }
+
+    public static void daShuJia(String s1, String s2){
+        System.out.print("\n两个大整数"+s1+"和"+s2+"相加=");
+        int[] ints1 = new int[s1.length()];
+        int[] ints2 = new int[s2.length()];
+        int max = s1.length() > s2.length() ? s1.length() : s2.length();
+        int[] result = new int[max + 1];
+        for (int i = 0; i < s1.length(); i++){
+            ints1[i] = Integer.parseInt(s1.charAt(s1.length() - i - 1)+"");
+        }
+        for (int i = 0; i < s2.length(); i++){
+            ints2[i] = Integer.parseInt(s2.charAt(s2.length() - i - 1)+"");
+        }
+
+        int i = 0, j = 0;
+        boolean jin = false;
+        while (i <= ints1.length - 1 || j <= ints2.length - 1){
+
+            if(i > ints1.length - 1){
+                result[i] = result[i] + ints2[j];
+            }else if(j > ints2.length - 1){
+                result[i] = result[i] + ints1[i];
+            }else {
+                if (result[i] + ints1[i] + ints2[j] >= 10) {
+                    jin = true;
+                    result[i] = (result[i] + ints1[i] + ints2[j]) % 10;
+                } else {
+                    result[i] = result[i] + (ints1[i] + ints2[j]);
+                }
+            }
+
+            i++;
+            j++;
+            if(jin) {
+                result[i] = 1;
+                jin = false;
+            }
+        }
+        for (int i1 = result.length - 1; i1 >= 0; i1--){
+            if(i1 == result.length - 1 && result[i1] == 0){
+                continue;
+            }
+            System.out.print(result[i1]);
+        }
     }
 }
