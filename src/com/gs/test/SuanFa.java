@@ -103,6 +103,39 @@ public class SuanFa {
         deleteMinNumber2("12340",3);
         daShuJia("426709752318", "95481253129");
         System.out.println("\n动态规划，金矿："+jinKuang(5, 10, new int[]{400, 500, 200, 300, 350}, new int[]{5, 5, 3, 4, 3}));
+        String sss = "abcde";
+        System.out.println(sss + " 的最长的字母序连续子字符串的长度：" + longestContinuousSubstring(sss));
+    }
+
+    /**
+     * 2414. 最长的字母序连续子字符串的长度
+     * @param s
+     * @return
+     */
+    public static int longestContinuousSubstring(String s) {
+        if(s == null || s.length() == 0){
+            return 0;
+        }
+        char[] chars = s.toCharArray();
+        int max = 1, result = 1;
+        char a;
+        for(int i = 0; i < chars.length; i++){
+            a = chars[i];
+            max = 1;
+            for(int j = i + 1; j < chars.length; j++){
+                if(a + 1 == chars[j]){
+                    max++;
+                    if(max > result){
+                        result = max;
+                    }
+                    a = chars[j];
+                }else{
+                    break;
+                }
+            }
+        }
+
+        return max;
     }
 
     public static char callKotlin() {
