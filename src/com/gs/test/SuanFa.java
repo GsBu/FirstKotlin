@@ -119,23 +119,19 @@ public class SuanFa {
         char[] chars = s.toCharArray();
         int max = 1, result = 1;
         char a;
-        for(int i = 0; i < chars.length; i++){
+        for(int i = 0; i < chars.length - 1; i++){
             a = chars[i];
-            max = 1;
-            for(int j = i + 1; j < chars.length; j++){
-                if(a + 1 == chars[j]){
-                    max++;
-                    if(max > result){
-                        result = max;
-                    }
-                    a = chars[j];
-                }else{
-                    break;
+            if(a + 1 == chars[i + 1]){
+                max++;
+                if(max > result){
+                    result = max;
                 }
+            }else{
+                max = 1;
             }
         }
 
-        return max;
+        return result;
     }
 
     public static char callKotlin() {
